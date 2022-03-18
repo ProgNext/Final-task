@@ -1,6 +1,7 @@
 from .base_page import BasePage
 from .locators import ProductPageLocators
 
+
 class ProductPage(BasePage):
     def click_button_add_to_basket(self):
         login_link = self.browser.find_element(*ProductPageLocators.BUTTON_ADD_TO_BASKET)
@@ -31,3 +32,12 @@ class ProductPage(BasePage):
         priceProductInAlertInner = self.browser.find_element(*ProductPageLocators.PRICE_PRODUCT_IN_ALERTINNER).text
         self.s1_equals_s2(nameProduct, nameProductInAlertInner)
         self.s1_equals_s2(priceProduct, priceProductInAlertInner)
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGES), \
+            "Success message is presented, but should not be"
+
+    def should_be_success_message_is_disappeared(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGES), \
+            "Success message is not disappeared"
+
